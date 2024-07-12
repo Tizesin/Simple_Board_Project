@@ -110,13 +110,13 @@ public class QuestionDto {
             this.content = content;
         }
 
-        public Member getMember() {
-            return member;
-        }
-
-        public void setMember(Member member) {
-            this.member = member;
-        }
+//        public Member getMember() {
+//            return member;
+//        }
+//
+//        public void setMember(Member member) {
+//            this.member = member;
+//        }
 
         public String getQuestionType() {
             return questionType;
@@ -137,7 +137,7 @@ public class QuestionDto {
         private String content;
 //        private String fileName;
 //        private String filePath;
-        private Member member;
+//        private Member member;
         private String questionType;
         private String questionStatus;
     }
