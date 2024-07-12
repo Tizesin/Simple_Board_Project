@@ -1,6 +1,6 @@
-package com.example.answer.likechk.repository;
+package com.example.likechk.repository;
 
-import com.example.answer.likechk.entity.LikeChk;
+import com.example.likechk.entity.LikeChk;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;

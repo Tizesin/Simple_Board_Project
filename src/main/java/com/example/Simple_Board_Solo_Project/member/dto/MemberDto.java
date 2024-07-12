@@ -39,9 +39,11 @@ public class MemberDto {
 
     @AllArgsConstructor
     @Getter
+    @Setter
     public static class Response {
         private long memberId;
         private String email;
         private String name;
+        private String password;
     }
 }

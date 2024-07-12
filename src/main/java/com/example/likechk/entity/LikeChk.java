@@ -1,4 +1,4 @@
-package com.example.answer.likechk.entity;
+package com.example.likechk.entity;
 
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;

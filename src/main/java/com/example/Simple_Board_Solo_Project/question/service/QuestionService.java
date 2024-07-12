@@ -16,8 +16,8 @@ public class QuestionService {
     private final QuestionRepository repository;
 
     public Question createQuestion(Question question) {
-        Question savedquestion = repository.save(question);
-        return savedquestion;
+        Question savedQuestion = repository.save(question);
+        return savedQuestion;
     }
 
     public Question patchQuestion(Question question) {
@@ -32,11 +32,12 @@ public class QuestionService {
         return repository.save(question);
     }
 
-    @Transactional(readOnly = true)
-    public Question findQuestion(long questionId) {
-        return findVerifiedQuestion(questionId);
+    public void deleteQuestion(long questionId) {
+        Question findQuestion = findVerifiedQuestion(questionId);
+        findQuestion.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETED);
     }
 
+    @Transactional(readOnly = true)
     public Question findVerifiedQuestion(long questionId) {
         Optional<Question> findQuestion =
                 repository.findById(questionId);

@@ -1,10 +1,14 @@
 package com.example.Simple_Board_Solo_Project.question.entity;
 
+import com.example.Simple_Board_Solo_Project.answer.entity.Answer;
+import com.example.Simple_Board_Solo_Project.audit.Auditable;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-public class Question {
+public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
@@ -23,11 +27,8 @@ public class Question {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column
-    private LocalDateTime createAt = LocalDateTime.now();
-
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 //
@@ -35,9 +36,9 @@ public class Question {
 //    @JsonBackReference
 //    private List<LikeChk> likeChks = new ArrayList<>();
 //
-//    @OneToOne(mappedBy = "question")
-//    @JsonManagedReference
-//    private Answer answer;
+    @OneToOne(mappedBy = "question")
+    @JsonManagedReference
+    private Answer answer;
 
 //    @Column
 //    private int likeCnt = 0;

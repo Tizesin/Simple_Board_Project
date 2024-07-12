@@ -3,6 +3,7 @@ package com.example.Simple_Board_Solo_Project.member.entity;
 
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private long memberId;
 
     @Column(nullable = false, length = 30)
     private String name;
@@ -29,7 +30,7 @@ public class Member {
     @Column(nullable = false,length = 100)
     private String password;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
 //

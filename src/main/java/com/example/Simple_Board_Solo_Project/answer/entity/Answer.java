@@ -1,4 +1,4 @@
-package com.example.answer.entity;
+package com.example.Simple_Board_Solo_Project.answer.entity;
 
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -19,11 +19,11 @@ public class Answer {
     private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String text;
+    private String content;
 
-//    @OneToOne
-//    @JsonBackReference
-//    @JoinColumn(name = "QUESTION_ID")
-//    private Question question;
+    @OneToOne
+    @JsonBackReference
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
 
 }

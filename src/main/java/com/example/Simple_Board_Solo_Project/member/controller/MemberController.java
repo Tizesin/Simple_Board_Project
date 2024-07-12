@@ -38,9 +38,8 @@ public class MemberController {
         requestBody.setMemberId(memberId);
         Member member =
                 service.updateMember(mapper.memberPatchToMember(requestBody));
-        URI uri = URI.create(MEMBER_DEF_URL + memberId);
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
+                new SingleResponseDto<>(mapper.memberToMemberDtoResponse(member)),
                         HttpStatus.OK);
     }
 
