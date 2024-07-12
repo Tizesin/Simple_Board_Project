@@ -1,6 +1,7 @@
 package com.example.Simple_Board_Solo_Project.member.entity;
 
 
+import com.example.Simple_Board_Solo_Project.member.dto.MemberDto;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -37,11 +38,11 @@ public class Member {
 //    @JsonBackReference
 //    @OneToMany(mappedBy = "member")
 //    private List<LikeChk> likeChks = new ArrayList<>();
-
-    public Member(Long memberId, String name, String email, String password) {
-        this.memberId = memberId;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+//
+//    public Member(Long memberId, String name, String email, String password) {
+//        this.memberId = memberId;
+//        this.name = name;
+//        this.email = email;
+//        this.password = password;
+//    }
 }

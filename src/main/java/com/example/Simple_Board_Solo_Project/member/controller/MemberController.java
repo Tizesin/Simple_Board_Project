@@ -27,7 +27,7 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
-        Member createMember = service.createMember(mapper.memberPostToMember(requestBody));
+        Member createMember = service.createMember(mapper.memberPostDToToMember(requestBody));
         URI location = UriCreator.createUri(MEMBER_DEF_URL,createMember.getMemberId());
         return ResponseEntity.created(location).build();
     }
@@ -39,7 +39,7 @@ public class MemberController {
         Member member =
                 service.updateMember(mapper.memberPatchToMember(requestBody));
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberDtoResponse(member)),
+                new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)),
                         HttpStatus.OK);
     }
 
