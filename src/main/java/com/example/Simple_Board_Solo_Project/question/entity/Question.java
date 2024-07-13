@@ -36,8 +36,8 @@ public class Question extends Auditable {
 //    @JsonBackReference
 //    private List<LikeChk> likeChks = new ArrayList<>();
 //
-    @OneToOne(mappedBy = "question")
-    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ANSWER_ID")
     private Answer answer;
 
 //    @Column

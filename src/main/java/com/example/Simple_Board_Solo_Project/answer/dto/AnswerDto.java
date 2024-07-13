@@ -1,12 +1,15 @@
 package com.example.Simple_Board_Solo_Project.answer.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
 public class AnswerDto {
 
+    @Getter
     @AllArgsConstructor
     public static class Post{
         @NotBlank
@@ -15,11 +18,9 @@ public class AnswerDto {
         @NotBlank
         private String content;
 
+        @Setter
         private long questionId;
 
-        public void setQuestionId(long questionId) {
-            this.questionId = questionId;
-        }
     }
 
     @AllArgsConstructor

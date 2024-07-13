@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AnswerService {
     private final AnswerRepository repository;
@@ -19,7 +20,7 @@ public class AnswerService {
 
     public Answer createAnswer(Answer answer) {
         Answer savedAnswer = repository.save(answer);
-        changeQuestionAToB(answer, Question.QuestionStatus.QUESTION_REGISTERED,
+        changeQuestionAToB(savedAnswer, Question.QuestionStatus.QUESTION_REGISTERED,
                 Question.QuestionStatus.QUESTION_ANSWERED);
         return savedAnswer;
     }
@@ -53,8 +54,10 @@ public class AnswerService {
         Optional<Question> findQuestion = questionRepository.findById(answer.getAnswerId());
         Question resultQuestion = findQuestion.orElseThrow(() ->
                 new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        if(resultQuestion.getQuestionStatus().equals(A))
+        if(resultQuestion.getQuestionStatus().equals(A)){
             resultQuestion.setQuestionStatus(B);
+            resultQuestion.setAnswer(answer);
+        }
         questionRepository.save(resultQuestion);
     }
 

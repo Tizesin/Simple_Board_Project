@@ -22,11 +22,9 @@ public class AnswerController {
     private final AnswerService service;
     private final AnswerMapper mapper;
 
-    @PostMapping("/{question-id}")
-    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-                                     @RequestBody AnswerDto.Post requestBody) {
-        requestBody.setQuestionId(questionId);
-        Answer answer = mapper.answerPostToAnswer(requestBody);
+    @PostMapping
+    public ResponseEntity postAnswer(@RequestBody AnswerDto.Post requestBody) {
+        Answer answer = service.createAnswer(mapper.answerPostToAnswer(requestBody));
         URI location = UriCreator.createUri(ANSWER_DEF_URL, answer.getAnswerId());
         return ResponseEntity.created(location).build();
     }

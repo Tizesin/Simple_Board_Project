@@ -1,10 +1,12 @@
 package com.example.Simple_Board_Solo_Project.question.dto;
 
+import com.example.Simple_Board_Solo_Project.answer.entity.Answer;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.example.Simple_Board_Solo_Project.question.entity.Question.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
@@ -91,24 +93,11 @@ public class QuestionDto {
 
     }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
     public static class Response {
         private String title;
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
 
 //        public Member getMember() {
 //            return member;
@@ -118,27 +107,12 @@ public class QuestionDto {
 //            this.member = member;
 //        }
 
-        public String getQuestionType() {
-            return questionType;
-        }
-
-        public void setQuestionType(String questionType) {
-            this.questionType = questionType;
-        }
-
-        public String getQuestionStatus() {
-            return questionStatus;
-        }
-
-        public void setQuestionStatus(String questionStatus) {
-            this.questionStatus = questionStatus;
-        }
-
         private String content;
 //        private String fileName;
 //        private String filePath;
 //        private Member member;
         private String questionType;
         private String questionStatus;
+        private Answer answer;
     }
 }
