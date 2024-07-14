@@ -71,10 +71,10 @@ public class QuestionController {
     public ResponseEntity GetQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int size){
         Page<Question> pageQuestions = service.findQuestions(page - 1, size);
-        List<Question> orders = pageQuestions.getContent();
+        List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageQuestions),
+                new MultiResponseDto<>(mapper.questionToQuestionDtoResponses(questions), pageQuestions),
                 HttpStatus.OK);
 
     }

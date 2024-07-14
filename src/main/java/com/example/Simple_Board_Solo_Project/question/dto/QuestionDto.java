@@ -4,10 +4,7 @@ import com.example.Simple_Board_Solo_Project.answer.entity.Answer;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.example.Simple_Board_Solo_Project.question.entity.Question.QuestionType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -51,16 +48,10 @@ public class QuestionDto {
     @Getter
     @Setter
     @NoArgsConstructor
+    @Builder
+    @AllArgsConstructor
     public static class Response {
         private String title;
-
-//        public Member getMember() {
-//            return member;
-//        }
-//
-//        public void setMember(Member member) {
-//            this.member = member;
-//        }
 
         private String content;
 //        private String fileName;
