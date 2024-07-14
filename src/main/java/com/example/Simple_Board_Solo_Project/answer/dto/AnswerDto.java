@@ -38,43 +38,13 @@ public class AnswerDto {
         }
     }
 
+    @Getter
+    @Setter
     @NoArgsConstructor
     public static class Response {
         private long answerId;
         private String title;
         private String content;
         private long questionId;
-
-        public long getAnswerId() {
-            return answerId;
-        }
-
-        public void setAnswerId(long answerId) {
-            this.answerId = answerId;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public long getQuestionId() {
-            return questionId;
-        }
-
-        public void setQuestionId(long questionId) {
-            this.questionId = questionId;
-        }
     }
 }

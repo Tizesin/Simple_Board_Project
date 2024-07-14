@@ -1,5 +1,6 @@
 package com.example.Simple_Board_Solo_Project.question.controller;
 
+import com.example.Simple_Board_Solo_Project.dto.MultiResponseDto;
 import com.example.Simple_Board_Solo_Project.dto.SingleResponseDto;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
 import com.example.Simple_Board_Solo_Project.question.dto.QuestionDto;
@@ -8,6 +9,7 @@ import com.example.Simple_Board_Solo_Project.question.mapper.QuestionMapper;
 import com.example.Simple_Board_Solo_Project.question.service.QuestionService;
 import com.example.Simple_Board_Solo_Project.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/questions")
@@ -52,7 +55,7 @@ public class QuestionController {
     @GetMapping("/{question-Id}")
     public ResponseEntity getQuestion(@PathVariable("question-Id")
                                       @Positive long questionId) {
-        Question findQuestion = service.findVerifiedQuestion(questionId);
+        Question findQuestion = service.getQuestion(service.findVerifiedQuestion(questionId));
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.questionToQuestionDtoResponse(findQuestion)),
                 HttpStatus.OK);
@@ -64,15 +67,15 @@ public class QuestionController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-//    @GetMapping
-//    public ResponseEntity GetQuestions(@Positive @RequestParam int page,
-//                                       @Positive @RequestParam int size){
-//        Page<Answer> pageAnswer = service.findAnswers(page - 1, size);
-//        List<Answer> orders = pageAnswers.getContent();
-//
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageOrders),
-//                HttpStatus.OK);
-//
-//    }
+    @GetMapping
+    public ResponseEntity GetQuestions(@Positive @RequestParam int page,
+                                       @Positive @RequestParam int size){
+        Page<Question> pageQuestions = service.findQuestions(page - 1, size);
+        List<Question> orders = pageQuestions.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.ordersToOrderResponseDtos(orders), pageQuestions),
+                HttpStatus.OK);
+
+    }
 }

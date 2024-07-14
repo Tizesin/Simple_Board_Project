@@ -12,26 +12,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 public class QuestionDto {
+    @Getter
     @AllArgsConstructor
     public static class Post{
         @NotBlank
         private String title;
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public long getMemberId() {
-            return memberId;
-        }
-
-        public QuestionType getQuestionType() {
-            return questionType;
-        }
 
         @NotBlank
         private String content;
@@ -46,41 +31,11 @@ public class QuestionDto {
 //        private String filePath;
     }
 
+    @Getter
+    @Setter
     public static class Patch{
 
         private long questionId;
-
-        public long getQuestionId() {
-            return questionId;
-        }
-
-        public void setQuestionId(long questionId) {
-            this.questionId = questionId;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public void setQuestionType(QuestionType questionType) {
-            this.questionType = questionType;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public QuestionType getQuestionType() {
-            return questionType;
-        }
 
         @NotBlank
         private String title;
@@ -114,5 +69,6 @@ public class QuestionDto {
         private String questionType;
         private String questionStatus;
         private Answer answer;
+        private int viewCnt;
     }
 }

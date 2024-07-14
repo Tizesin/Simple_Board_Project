@@ -3,8 +3,7 @@ package com.example.Simple_Board_Solo_Project.question.entity;
 import com.example.Simple_Board_Solo_Project.answer.entity.Answer;
 import com.example.Simple_Board_Solo_Project.audit.Auditable;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,8 +35,9 @@ public class Question extends Auditable {
 //    @JsonBackReference
 //    private List<LikeChk> likeChks = new ArrayList<>();
 //
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "ANSWER_ID")
+    @JsonManagedReference
     private Answer answer;
 
 //    @Column

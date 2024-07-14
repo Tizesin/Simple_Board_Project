@@ -23,6 +23,7 @@ public class Answer {
     private String content;
 
     @OneToOne
+    @JsonBackReference
     private Question question;
 
 }
