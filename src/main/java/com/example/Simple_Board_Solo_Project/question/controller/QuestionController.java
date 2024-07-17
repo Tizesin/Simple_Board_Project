@@ -3,11 +3,15 @@ package com.example.Simple_Board_Solo_Project.question.controller;
 import com.example.Simple_Board_Solo_Project.dto.MultiResponseDto;
 import com.example.Simple_Board_Solo_Project.dto.SingleResponseDto;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
+import com.example.Simple_Board_Solo_Project.question.dto.LikeDto;
 import com.example.Simple_Board_Solo_Project.question.dto.QuestionDto;
+import com.example.Simple_Board_Solo_Project.question.entity.Like;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
+import com.example.Simple_Board_Solo_Project.question.mapper.LikeMapper;
 import com.example.Simple_Board_Solo_Project.question.mapper.QuestionMapper;
 import com.example.Simple_Board_Solo_Project.question.service.QuestionService;
 import com.example.Simple_Board_Solo_Project.utils.UriCreator;
+import com.example.likechk.mapper.LikeChkMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,6 +31,7 @@ import java.util.List;
 public class QuestionController {
     private final static String QUESTION_DEF_URL = "/questions";
     private final QuestionMapper mapper;
+    private final LikeMapper likeMapper;
     private final QuestionService service;
 
     @PostMapping
@@ -40,6 +45,12 @@ public class QuestionController {
         URI location = UriCreator.createUri(QUESTION_DEF_URL, createQuestion.getQuestionId());
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping("/like")
+    public ResponseEntity postLike(@RequestBody @Valid LikeDto.Post requestBody) {
+        service.switchLike(likeMapper.likePostDtoToLike(requestBody));
+
     }
 
     @PatchMapping("/{question-Id}")

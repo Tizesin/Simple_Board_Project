@@ -2,6 +2,9 @@ package com.example.Simple_Board_Solo_Project.question.service;
 
 import com.example.Simple_Board_Solo_Project.exception.BusinessLogicException;
 import com.example.Simple_Board_Solo_Project.exception.ExceptionCode;
+import com.example.Simple_Board_Solo_Project.member.entity.Member;
+import com.example.Simple_Board_Solo_Project.member.repository.MemberRepository;
+import com.example.Simple_Board_Solo_Project.question.entity.Like;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.example.Simple_Board_Solo_Project.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository repository;
+    private final MemberRepository memberRepository;
 
     public Question createQuestion(Question question) {
         Question savedQuestion = repository.save(question);
@@ -59,5 +63,13 @@ public class QuestionService {
 
     public Page<Question> findQuestions(int page, int size) {
         return repository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
+    }
+
+    public void switchLike(Like like) {
+        Question question = findVerifiedQuestion(like.getLikeId());
+
+        Member member
+
+
     }
 }

@@ -18,13 +18,13 @@ public class LikeChk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long LikeId;
 
-//    @ManyToOne
-//    @JsonManagedReference
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
-//
-//    @ManyToOne
-//    @JsonManagedReference
-//    @JoinColumn(name = "QUESTION_ID")
-//    private Question question;
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
 }

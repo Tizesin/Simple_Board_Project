@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static com.example.Simple_Board_Solo_Project.question.entity.Question.QuestionStatus.*;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface QuestionMapper {
     default Question questionDtoPostToQuestion(QuestionDto.Post requestBody){
         Member member = new Member();

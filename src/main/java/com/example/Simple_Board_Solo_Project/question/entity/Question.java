@@ -3,14 +3,18 @@ package com.example.Simple_Board_Solo_Project.question.entity;
 import com.example.Simple_Board_Solo_Project.answer.entity.Answer;
 import com.example.Simple_Board_Solo_Project.audit.Auditable;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
+import com.example.likechk.entity.LikeChk;
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.engine.internal.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,15 +34,18 @@ public class Question extends Auditable {
     @JsonBackReference
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-//
-//    @OneToMany
-//    @JsonBackReference
-//    private List<LikeChk> likeChks = new ArrayList<>();
-//
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "LIKE_ID")
+    @JsonManagedReference
+    private List<Like> likes = new ArrayList<>();
+
     @OneToOne
     @JoinColumn(name = "ANSWER_ID")
     @JsonManagedReference
     private Answer answer;
+
+
 
 //    @Column
 //    private int likeCnt = 0;
