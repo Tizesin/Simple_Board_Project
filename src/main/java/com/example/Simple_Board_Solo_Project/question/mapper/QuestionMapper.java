@@ -47,6 +47,7 @@ public interface QuestionMapper {
                         .questionStatus(question.getQuestionStatus().getStatusDescription())
                         .answer(question.getAnswer())
                         .viewCnt(question.getViewCnt())
+//                        .likeCnt(question.getLikeCnt())
                         .build())
                 .collect(Collectors.toList());
 

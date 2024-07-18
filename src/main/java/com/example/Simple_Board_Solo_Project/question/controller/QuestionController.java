@@ -9,9 +9,9 @@ import com.example.Simple_Board_Solo_Project.question.entity.Like;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
 import com.example.Simple_Board_Solo_Project.question.mapper.LikeMapper;
 import com.example.Simple_Board_Solo_Project.question.mapper.QuestionMapper;
+import com.example.Simple_Board_Solo_Project.question.service.LikeService;
 import com.example.Simple_Board_Solo_Project.question.service.QuestionService;
 import com.example.Simple_Board_Solo_Project.utils.UriCreator;
-import com.example.likechk.mapper.LikeChkMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -33,6 +33,7 @@ public class QuestionController {
     private final QuestionMapper mapper;
     private final LikeMapper likeMapper;
     private final QuestionService service;
+    private final LikeService likeService;
 
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody
@@ -47,11 +48,19 @@ public class QuestionController {
         return ResponseEntity.created(location).build();
     }
 
-    @PostMapping("/like")
-    public ResponseEntity postLike(@RequestBody @Valid LikeDto.Post requestBody) {
-        service.switchLike(likeMapper.likePostDtoToLike(requestBody));
-
+    @PostMapping("/{questionId}/like")
+    public ResponseEntity postLike(@PathVariable @Positive long questionId,
+                                   @RequestBody @Valid LikeDto.Post requestBody) {
+        requestBody.setQuestionId(questionId);
+        likeService.toggleLike(requestBody.getMemberId(), requestBody.getQuestionId());
+        return new ResponseEntity(HttpStatus.OK);
     }
+
+//    @PostMapping("/like")
+//    public ResponseEntity postLike(@RequestBody @Valid LikeDto.Post requestBody) {
+//        service.switchLike(likeMapper.likePostDtoToLike(requestBody));
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
     @PatchMapping("/{question-Id}")
     public ResponseEntity patchQuestion(@PathVariable("question-Id") @Positive long questionId

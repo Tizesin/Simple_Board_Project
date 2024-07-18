@@ -3,7 +3,6 @@ package com.example.Simple_Board_Solo_Project.question.entity;
 import com.example.Simple_Board_Solo_Project.answer.entity.Answer;
 import com.example.Simple_Board_Solo_Project.audit.Auditable;
 import com.example.Simple_Board_Solo_Project.member.entity.Member;
-import com.example.likechk.entity.LikeChk;
 import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,20 +34,17 @@ public class Question extends Auditable {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "LIKE_ID")
+    @OneToOne(mappedBy = "question")
     @JsonManagedReference
-    private List<Like> likes = new ArrayList<>();
+    private Like like;
 
     @OneToOne
     @JoinColumn(name = "ANSWER_ID")
     @JsonManagedReference
     private Answer answer;
 
-
-
-//    @Column
-//    private int likeCnt = 0;
+    @Column
+    private int likeCnt = 0;
 
     @Column
     private int viewCnt = 0;

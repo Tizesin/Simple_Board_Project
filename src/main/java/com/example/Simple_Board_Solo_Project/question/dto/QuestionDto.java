@@ -61,5 +61,6 @@ public class QuestionDto {
         private String questionStatus;
         private Answer answer;
         private int viewCnt;
+        private int likeCnt;
     }
 }

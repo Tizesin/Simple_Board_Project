@@ -4,7 +4,6 @@ package com.example.Simple_Board_Solo_Project.member.entity;
 import com.example.Simple_Board_Solo_Project.member.dto.MemberDto;
 import com.example.Simple_Board_Solo_Project.question.entity.Like;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
-import com.example.likechk.entity.LikeChk;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;

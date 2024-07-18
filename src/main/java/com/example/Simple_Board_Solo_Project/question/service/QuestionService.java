@@ -6,6 +6,7 @@ import com.example.Simple_Board_Solo_Project.member.entity.Member;
 import com.example.Simple_Board_Solo_Project.member.repository.MemberRepository;
 import com.example.Simple_Board_Solo_Project.question.entity.Like;
 import com.example.Simple_Board_Solo_Project.question.entity.Question;
+import com.example.Simple_Board_Solo_Project.question.repository.LikeRepository;
 import com.example.Simple_Board_Solo_Project.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,14 +15,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.Simple_Board_Solo_Project.exception.ExceptionCode.MEMBER_EXISTS;
+
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository repository;
     private final MemberRepository memberRepository;
+    private final LikeRepository likeRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public Question createQuestion(Question question) {
         Question savedQuestion = repository.save(question);
@@ -66,10 +76,19 @@ public class QuestionService {
     }
 
     public void switchLike(Like like) {
-        Question question = findVerifiedQuestion(like.getLikeId());
-
-        Member member
-
-
+        Question question = findVerifiedQuestion(like.getQuestion().getQuestionId());
+        Member member = memberRepository.findById(like.getMember().getMemberId()).orElseThrow(()->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        if(likeRepository.findByMember(member).isPresent()) {
+            likeRepository.delete(like);
+//            entityManager.flush(); // 변경 사항을 데이터베이스에 즉시 반영
+            question.setLikeCnt(question.getLikeCnt()-1);
+        }else{
+            likeRepository.save(like);
+            question.setLikeCnt(question.getLikeCnt()+1);
+        }
+        entityManager.flush(); // 변경 사항을 데이터베이스에 즉시 반영
+        repository.save(question);
+        entityManager.clear();
     }
 }
