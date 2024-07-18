@@ -21,7 +21,7 @@ public class Like {
     @JsonBackReference
     private Member member;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     @JsonBackReference
     private Question question;

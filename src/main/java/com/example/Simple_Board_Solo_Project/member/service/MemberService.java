@@ -43,7 +43,8 @@ public class MemberService {
         List<Question> findQuestion = questionRepository.findByMember(findMember);
         findQuestion.stream()
                         .forEach(question -> {
-                            question.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETED);
+                            question.setQuestionStatus(Question.QuestionStatus.QUESTION_DEACTIVED);
+                            question.setMember(null);
                             questionRepository.save(question);
                         });
         memberRepository.delete(findMember);

@@ -7,12 +7,8 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.engine.internal.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -34,9 +30,9 @@ public class Question extends Auditable {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToOne(mappedBy = "question")
+    @OneToMany(mappedBy = "question")
     @JsonManagedReference
-    private Like like;
+    private List<Like> likes;
 
     @OneToOne
     @JoinColumn(name = "ANSWER_ID")
